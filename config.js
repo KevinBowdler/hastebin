@@ -33,7 +33,9 @@
   },
 
   "storage": {
-    "type": "file"
+    "type": "memcached",
+    "host": "memcached",
+    "port": 11211
   },
 
   "documents": {

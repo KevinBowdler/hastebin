@@ -1,5 +1,6 @@
 Dockerfile
 .git
+.github
 npm-debug.log
 node_modules
 *.swp

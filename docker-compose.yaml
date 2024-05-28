@@ -1,12 +1,15 @@
 version: '3.0'
 services:
-  haste-server:
-    build: .
+  hastebin:
+    #build: .
+    image: hastebin:latest
     environment:
       - STORAGE_TYPE=memcached
       - STORAGE_HOST=memcached
       - STORAGE_PORT=11211
+      - STORAGE_EXPIRE_SECONDS=10
     ports:
       - 7777:7777
   memcached:
     image: memcached:latest
+

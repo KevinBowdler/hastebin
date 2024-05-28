@@ -9,12 +9,14 @@ WORKDIR /usr/src/app
 
 COPY --chown=node:node . .
 
+RUN ls
+
 RUN npm install && \
     npm install redis@0.8.1 && \
     npm install pg@8.11.3 && \
-    npm install memcached@2.2.2 && \
+    npm install memcached@^2.2.2 && \
     npm install aws-sdk@2.814.0 && \
-    npm install rethinkdbdash@2.3.31
+    npm install rethinkdbdash@2.3.31 
 
 ENV STORAGE_TYPE=memcached \
     STORAGE_HOST=127.0.0.1 \
@@ -57,6 +59,7 @@ ENV DOCUMENTS=about=./about.md
 EXPOSE ${PORT}
 STOPSIGNAL SIGINT
 ENTRYPOINT [ "bash", "docker-entrypoint.sh" ]
+#ENTRYPOINT [ "bash", "exec.sh" ]
 
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s \
     --retries=3 CMD [ "sh", "-c", "echo -n 'curl localhost:7777... '; \
@@ -65,4 +68,4 @@ HEALTHCHECK --interval=30s --timeout=30s --start-period=5s \
     ) && echo OK || (\
         echo Fail && exit 2\
     )"]
-CMD ["npm", "start"]
+#CMD ["npm", "start"]
